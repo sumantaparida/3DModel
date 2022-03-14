@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunk_3dmodel=self.webpackChunk_3dmodel||[]).push([[841],{1841:function(e,n,u){u.r(n);var t=u(9346);n.default=(0,t.ZP)((function(){return u.e(805).then(u.bind(u,5805))}))}}]);
+//# sourceMappingURL=841.88b772c7.chunk.js.map

@@ -1,11 +1,8 @@
 /* eslint-disable no-sequences */
 import React, { Suspense, Fragment, lazy } from "react"
-import { Canvas } from "@react-three/fiber"
-import { ContactShadows, Environment, OrbitControls } from "@react-three/drei"
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { proxy } from "valtio"
-
-const Picker = lazy(() => import('./component/Picker/Loadable'));
-const Shoe = lazy(() => import('./component/Shoe'));
+const ShoeModel = lazy(() => import('./component/ShoeModel/Loadable'));
 
 const state = proxy({
   current: null,
@@ -24,20 +21,12 @@ const state = proxy({
 function App() {
   return (
     <Fragment>
-      <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0, 4], fov: 50 }}>
-        <ambientLight intensity={0.5} />
-        <spotLight intensity={0.5} angle={0.1} penumbra={1} position={[10, 20, 10]} castShadow />
-        <Suspense fallback={null}>
-          <Shoe state={state} />
-          <Environment preset="city" />
-          <ContactShadows rotation-x={Math.PI / 2} position={[0, -0.8, 0]} opacity={0.25} width={10} height={10} blur={1.5} far={0.8} />
-        </Suspense>
-        <OrbitControls enableZoom={false} enablePan={false} />
-      </Canvas>
-      {/* NOTE: Picker */}
-      <Suspense fallback={null}>
-        <Picker state={state} />
-      </Suspense>
+      <h4>Shoe :</h4>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Suspense fallback={<span>Loading ...</span>}><ShoeModel state={state} /></Suspense>} />
+        </Routes>
+      </BrowserRouter>
     </Fragment>
   );
 }
